@@ -1,0 +1,66 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  style="width: 300px"
+  #formRef="ngForm"
+>
+  <div class="form-group">
+    <input type="checkbox" formControlName="enabled" />
+    <label for="">Enabled</label>
+  </div>
+
+  <div class="form-group">
+    <label for="">value *</label>
+    <input type="text" formControlName="value" />
+  </div>
+
+  <div class="form-group">
+    <label for="">selectionA *</label>
+    <select formControlName="selectionA">
+      <option value="a">A</option>
+      <option value="b">B</option>
+    </select>
+  </div>
+
+  <div
+    class="form-group"
+    [style.visibility]="form.get('selectionA').value ? 'visible' : 'hidden'"
+  >
+    <label for="">selectionB *</label>
+
+    <select formControlName="selectionB">
+      <option
+        *ngFor="let option of selectionBOptions$ | async"
+        [value]="option.value"
+      >
+        {{ option.name }}
+      </option>
+    </select>
+  </div>
+
+  <div
+    class="form-group"
+    [style.visibility]="form.get('selectionB').value ? 'visible' : 'hidden'"
+  >
+    <label for="">selectionC *</label>
+
+    <select formControlName="selectionC">
+      <option
+        *ngFor="let option of selectionCOptions$ | async"
+        [value]="option.value"
+      >
+        {{ option.name }}
+      </option>
+    </select>
+  </div>
+
+  <button>submit</button>
+
+  <hr />
+
+  <div class="form-group">form valid: {{ form.valid }}</div>
+
+  <div class="form-group" *ngIf="form.touched && form.errors">
+    errors: {{ form.errors | json }}
+  </div>
+</form>

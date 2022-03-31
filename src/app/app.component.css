@@ -1,0 +1,13 @@
+p {
+  font-family: Lato;
+}
+
+.form-group {
+  margin: 6px 0px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-group > *:not(input[type='checkbox']) {
+  width: 50%;
+}
